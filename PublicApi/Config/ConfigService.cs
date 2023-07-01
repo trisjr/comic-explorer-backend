@@ -1,8 +1,9 @@
-﻿using System.Reflection;
-using ApplicationCore.Entities.User;
+﻿using ApplicationCore.Entities.User;
+using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Base;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Infrastructure.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,7 @@ public static class ConfigService
             .AddDefaultTokenProviders();
 
         AddScope(services);
+        services.AddScoped<ITokenClaimsService, IdentityTokenClaimService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 
